@@ -32,7 +32,23 @@ def find_mismatch(text):
 
 
 def main():
-    text = input()
+    input_type = input("Enter 'F' for File or 'I' for import: ")
+    
+    if input_type.upper() == 'F':
+        file_name = input("File name: ")
+        try:
+            with open(file_name, 'r') as file:
+                text = file.read().strip()
+        except FileNotFoundError:
+            print("Error: file not found.")
+            return
+    elif input_type.upper() == 'I':
+        text = input("Enter brackets: ")
+    else:
+        print("Invalid input type.")
+        return
+    
+    
     mismatch = find_mismatch(text)
     # ja nav bijusi kļūme, tās pozīcija būs negatīva (ārpus teksta robežām)
     if mismatch == -1:
