@@ -47,8 +47,6 @@ def main():
     #Ja ievada 'I' (kā to dara testi) programma gaidīs iekavu ievadi
     elif input_type.upper() == 'I':
         text = input()
-    else:
-        print("Invalid input type.")
         return
     
     
