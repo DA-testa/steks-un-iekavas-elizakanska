@@ -35,6 +35,9 @@ def main():
     #Brīdids, kad gaida F vai I
     input_type = input()
     
+    #Ja text netiek inicializēts pirms if, visa programma sabrūk
+    text = ""
+    
     #Testi nelieto failus, bet tie tiek apskatīti, jo nosacījumos bija pieminēti
     if input_type.upper() == 'F':
         file_name = input()
