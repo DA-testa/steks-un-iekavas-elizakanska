@@ -39,12 +39,12 @@ def text_input():
                 return f.read().strip()
         except FileNotFoundError:
             print("File not found.")
-            return read_input()
+            return text_input()
     elif choice == "I":
         return input("Input: ")
     else:
         print("Invalid input.")
-        return read_input()
+        return text_input()
 
 
 
