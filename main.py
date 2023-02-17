@@ -32,18 +32,21 @@ def find_mismatch(text):
 
 
 def main():
-    input_type = input("Enter 'F' for File or 'I' for import: ")
+    #Brīdids, kad gaida F vai I
+    input_type = input()
     
+    #Testi nelieto failus, bet tie tiek apskatīti, jo nosacījumos bija pieminēti
     if input_type.upper() == 'F':
-        file_name = input("File name: ")
+        file_name = input()
         try:
             with open(file_name, 'r') as file:
                 text = file.read().strip()
         except FileNotFoundError:
             print("Error: file not found.")
             return
+    #Ja ievada 'I' (kā to dara testi) programma gaidīs iekavu ievadi
     elif input_type.upper() == 'I':
-        text = input("Enter brackets: ")
+        text = input()
     else:
         print("Invalid input type.")
         return
