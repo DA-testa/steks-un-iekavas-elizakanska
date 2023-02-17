@@ -31,8 +31,25 @@ def find_mismatch(text):
     return -1
 
 
+def text_input():
+    choice = input("For file input 'F'/ manual input 'I': ")
+    if choice == "F":
+        try:
+            with open(input("File name: ")) as f:
+                return f.read().strip()
+        except FileNotFoundError:
+            print("File not found.")
+            return read_input()
+    elif choice == "I":
+        return input("Input: ")
+    else:
+        print("Invalid input.")
+        return read_input()
+
+
+
 def main():
-    text = input()
+    text = text_input()
     mismatch = find_mismatch(text)
     # ja nav bijusi kļūme, tās pozīcija būs negatīva (ārpus teksta robežām)
     if mismatch == -1:
