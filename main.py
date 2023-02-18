@@ -10,32 +10,21 @@ def are_matching(left, right):
 
 
 def find_mismatch(text):
-    opening_brackets_stack = []
-    first_bracket_index = -1
-
+    stack = []
     for i in range(len(text)):
-        char = text[i]
-
-        #Kad programma atrod pirmo iekavu, tā piešķir mainīgajam tās vertību, lai tālāk var strādāt tiaki ar iekavu virktni
-        if char in "([{":
-            if first_bracket_index == -1:
-                first_bracket_index = i
-            opening_brackets_stack.append(Bracket(char, i))
-        elif char in ")]}":
-            if not opening_brackets_stack:
+        if text[i] in "([{":
+            stack.append((text[i], i))
+        elif text[i] in ")]}":
+            if not stack:
                 return i
-            top = opening_brackets_stack.pop()
-            if not are_matching(top.char, char):
+            top = stack.pop()
+            if not ((top[0] == '(' and text[i] == ')') or
+                    (top[0] == '[' and text[i] == ']') or
+                    (top[0] == '{' and text[i] == '}')):
                 return i
-
-    if opening_brackets_stack:
-        return opening_brackets_stack[0].position
-    elif first_bracket_index != -1:
-        return first_bracket_index
-    else:
-        return -1
-
-
+    if stack:
+        return stack[0][1]
+    return -1
 
 def main():
     text = input()
