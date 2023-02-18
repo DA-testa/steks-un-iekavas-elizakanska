@@ -39,17 +39,11 @@ def find_mismatch(text):
 
 def main():
     text = input()
-    #Pirmkārt nosaka, kur jāsāk skaitīt iekavu virkne
-    start_index = 0
-    while start_index < len(text) and text[start_index] not in "([{":
-        start_index += 1
-        
-    mismatch = find_mismatch(text[start_index:])
-    # ja nav bijusi kļūme, tās pozīcija būs negatīva (ārpus teksta robežām)
+    mismatch = find_mismatch(text)
     if mismatch == -1:
         print("Success")
     else:
-        print(mismatch + start_index + 1)
+        print(mismatch + 1)
 
 
 if __name__ == "__main__":
