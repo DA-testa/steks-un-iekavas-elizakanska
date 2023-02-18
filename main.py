@@ -10,13 +10,7 @@ def are_matching(left, right):
 
 
 def find_mismatch(text):
-    
-    #Pirmkārt nosaka, kur jāsāk skaitīt iekavu virkne
-    start_index = 0
-    while start_index < len(text) and text[start_index] not in "([{":
-        start_index += 1
-
-    
+   
     opening_brackets_stack = []
     for i, next in enumerate(text):
         if next in "([{":
@@ -39,8 +33,13 @@ def find_mismatch(text):
 
 
 def main():
-    text = input().rstrip()
-    mismatch = find_mismatch(text)
+    text = input()
+    #Pirmkārt nosaka, kur jāsāk skaitīt iekavu virkne
+    start_index = 0
+    while start_index < len(text) and text[start_index] not in "([{":
+        start_index += 1
+        
+    mismatch = find_mismatch(text[start_index])
     # ja nav bijusi kļūme, tās pozīcija būs negatīva (ārpus teksta robežām)
     if mismatch == -1:
         print("Success")
