@@ -23,8 +23,12 @@ def find_mismatch(text):
             opening_brackets_stack.append(Bracket(next, i))
 
         elif next in ")]}":
-            # Pārbauda vai steks nav tukšš, vai aizverošā iekava sakrīt ar averošo
-            if not opening_brackets_stack or not are_matching(opening_brackets_stack.pop().char, next):
+            # Tukšs steks, nav jēga tālāk skatīties
+            if not opening_brackets_stack:
+                return i
+            top = opening_brackets_stack.pop()
+            # Pārbauda vai aizverošā iekava sakrīt ar atverošo iekavu
+            if not are_matching(top.char, next):
                 return i
      
     # Ja steks vēl nav tukšs, tad beigas ir neaizvērtas iekavas
@@ -35,7 +39,7 @@ def find_mismatch(text):
 
 
 def main():
-    text = input()
+    text = input().rstrip()
     mismatch = find_mismatch(text)
     # ja nav bijusi kļūme, tās pozīcija būs negatīva (ārpus teksta robežām)
     if mismatch == -1:
