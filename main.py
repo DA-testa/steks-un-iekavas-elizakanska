@@ -10,26 +10,31 @@ def are_matching(left, right):
 
 
 def find_mismatch(text):
-   
     opening_brackets_stack = []
-    for i, next in enumerate(text):
-        if next in "([{":
-            opening_brackets_stack.append(Bracket(next, i))
+    first_bracket_index = -1
 
-        elif next in ")]}":
-            # Tukšs steks, nav jēga tālāk skatīties
+    for i in range(len(text)):
+        char = text[i]
+
+        #Kad programma atrod pirmo iekavu, tā piešķir mainīgajam tās vertību, lai tālāk var strādāt tiaki ar iekavu virktni
+        if char in "([{":
+            if first_bracket_index == -1:
+                first_bracket_index = i
+            opening_brackets_stack.append(Bracket(char, i))
+        elif char in ")]}":
             if not opening_brackets_stack:
                 return i
             top = opening_brackets_stack.pop()
-            # Pārbauda vai aizverošā iekava sakrīt ar atverošo iekavu
-            if not are_matching(top.char, next):
+            if not are_matching(top.char, char):
                 return i
-     
-    # Ja steks vēl nav tukšs, tad beigas ir neaizvērtas iekavas
+
     if opening_brackets_stack:
         return opening_brackets_stack[0].position
-    
-    return -1
+    elif first_bracket_index != -1:
+        return first_bracket_index
+    else:
+        return -1
+
 
 
 def main():
