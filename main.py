@@ -10,6 +10,13 @@ def are_matching(left, right):
 
 
 def find_mismatch(text):
+    
+    #Pirmkārt nosaka, kur jāsāk skaitīt iekavu virkne
+    start_index = 0
+    while start_index < len(text) and text[start_index] not in "([{":
+        start_index += 1
+
+    
     opening_brackets_stack = []
     for i, next in enumerate(text):
         if next in "([{":
@@ -32,27 +39,7 @@ def find_mismatch(text):
 
 
 def main():
-    #Brīdids, kad gaida F vai I
-    input_type = input()
-    
-    #Ja text netiek inicializēts pirms if, visa programma sabrūk
-    text = ""
-    
-    #Testi nelieto failus, bet tie tiek apskatīti, jo nosacījumos bija pieminēti
-    if input_type.upper() == 'F':
-        file_name = input()
-        try:
-            with open(file_name, 'r') as file:
-                text = file.read().strip()
-        except FileNotFoundError:
-            print("Error: file not found.")
-            return
-    #Ja ievada 'I' (kā to dara testi) programma gaidīs iekavu ievadi
-    elif input_type.upper() == 'I':
-        text = input()
-        return
-    
-    
+    text = input()
     mismatch = find_mismatch(text)
     # ja nav bijusi kļūme, tās pozīcija būs negatīva (ārpus teksta robežām)
     if mismatch == -1:
