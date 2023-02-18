@@ -39,7 +39,7 @@ def main():
     while start_index < len(text) and text[start_index] not in "([{":
         start_index += 1
         
-    mismatch = find_mismatch(text[start_index])
+    mismatch = find_mismatch(text[start_index:])
     # ja nav bijusi kļūme, tās pozīcija būs negatīva (ārpus teksta robežām)
     if mismatch == -1:
         print("Success")
